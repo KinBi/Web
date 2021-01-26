@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class UserDao extends AbstractDao<User> {
-  private static final String FIND_ALL = "SELECT user_id, nickname, email, password, role FROM users";
-  private static final String CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
-  private static final String FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
+  private static final String SQL_FIND_ALL = "SELECT user_id, nickname, email, password, role FROM users";
+  private static final String SQL_CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
+  private static final String SQL_FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
           "WHERE (nickname LIKE ? OR email LIKE ?) AND password LIKE ? LIMIT 1";
-  private static final String CREATE_USER = "INSERT INTO users (nickname, email, password, user_role) VALUES (?, ?, ?, ?) ";
+  private static final String SQL_CREATE_USER = "INSERT INTO users (nickname, email, password, user_role) VALUES (?, ?, ?, ?) ";
 
   @Override
   public List<User> findAll() throws DaoException {
@@ -31,7 +31,7 @@ public class UserDao extends AbstractDao<User> {
     PreparedStatement statement = null;
     boolean exists = false;
     try {
-      statement = connection.prepareStatement(CHECK_USER_EXISTANCE);
+      statement = connection.prepareStatement(SQL_CHECK_USER_EXISTANCE);
       statement.setString(1, entity.getNickname());
       statement.setString(2, entity.getEmail());
       ResultSet resultSet = statement.executeQuery();
@@ -50,7 +50,7 @@ public class UserDao extends AbstractDao<User> {
     PreparedStatement statement = null;
     boolean logined = false;
     try {
-      statement = connection.prepareStatement(FIND_USER);
+      statement = connection.prepareStatement(SQL_FIND_USER);
       statement.setString(1, entity.getNickname());
       statement.setString(2, entity.getEmail());
       statement.setString(3, password);
@@ -81,7 +81,7 @@ public class UserDao extends AbstractDao<User> {
     boolean created = false;
     if (!exists(entity)) {
       try {
-        statement = connection.prepareStatement(CREATE_USER);
+        statement = connection.prepareStatement(SQL_CREATE_USER);
         statement.setString(1, entity.getNickname());
         statement.setString(2, entity.getEmail());
         statement.setString(3, params[0]);
