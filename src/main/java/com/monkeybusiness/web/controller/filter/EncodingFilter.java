@@ -25,6 +25,7 @@ public class EncodingFilter implements Filter {
     chain.doFilter(req, resp);
   }
 
+  @Override
   public void init(FilterConfig config) throws ServletException {
     code = config.getInitParameter("encoding");
   }
