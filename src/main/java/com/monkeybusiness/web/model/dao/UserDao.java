@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.Locale;
 
 public class UserDao extends AbstractDao<User> {
-  private final String FIND_ALL = "SELECT user_id, nickname, email, password, role FROM users";
-  private final String CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
-  private final String FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
+  private static final String FIND_ALL = "SELECT user_id, nickname, email, password, role FROM users";
+  private static final String CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
+  private static final String FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
           "WHERE (nickname LIKE ? OR email LIKE ?) AND password LIKE ? LIMIT 1";
-  private final String CREATE_USER = "INSERT INTO users (nickname, email, password, user_role) VALUES (?, ?, ?, ?) ";
+  private static final String CREATE_USER = "INSERT INTO users (nickname, email, password, user_role) VALUES (?, ?, ?, ?) ";
 
   @Override
   public List<User> findAll() throws DaoException {
-    return null;
+    return null; // todo
   }
 
   @Override
   public User findEntityById(long id) throws DaoException {
-    return null;
+    return null; // todo
   }
 
   @Override
@@ -72,7 +72,7 @@ public class UserDao extends AbstractDao<User> {
 
   @Override
   public boolean delete(long id) throws DaoException {
-    return false;
+    return false; // todo
   }
 
   @Override
@@ -99,6 +99,6 @@ public class UserDao extends AbstractDao<User> {
 
   @Override
   public User update(User entity) throws DaoException {
-    return null;
+    return null; // todo
   }
 }
