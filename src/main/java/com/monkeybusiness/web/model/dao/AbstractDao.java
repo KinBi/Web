@@ -20,7 +20,7 @@ public abstract class AbstractDao <T extends Entity> {
 
   public void close(Statement statement) {
     try {
-      if (statement == null) {
+      if (statement != null) {
         statement.close();
       }
     } catch (SQLException throwables) {

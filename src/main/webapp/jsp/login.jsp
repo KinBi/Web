@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${currentLocale}"/>
-<fmt:setBundle basename="locale.content"/>
+<fmt:setLocale value="${currentLocale}" />
+<fmt:setBundle basename="locale.content" />
 <html>
 <head>
     <title>Login</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../jsp/part/background.jsp"/>
-<%@include file="../jsp/part/header.jsp" %>
+<%@ include file="../jsp/part/header.jsp" %>
 <div style="width: 400px;
             padding: 20px; alignment: left">
     <form name="loginForm" method="post" action="controller">

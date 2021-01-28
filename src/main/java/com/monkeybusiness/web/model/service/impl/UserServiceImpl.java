@@ -8,6 +8,7 @@ import com.monkeybusiness.web.model.entity.User;
 import com.monkeybusiness.web.model.service.UserService;
 import com.monkeybusiness.web.validator.UserDataValidator;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,13 +16,13 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
   private static final Logger logger = LogManager.getLogger();
-  private static final UserDao dao = new UserDao();
 
   @Override
   public Optional<User> registrate(String nickname, String email, String password) throws UserServiceException {
     if (!UserDataValidator.isUserValid(nickname, email, password)) {
       throw new UserServiceException();
     }
+    UserDao dao = new UserDao();
     Optional<User> registratedUser = Optional.empty();
     EntityTransaction transaction = new EntityTransaction();
     transaction.begin(dao);
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
       }
       transaction.commit();
     } catch (DaoException e) {
-      e.printStackTrace();
+      logger.log(Level.ERROR, e);
     } finally {
       transaction.end();
     }
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
     if (!UserDataValidator.isLoginValid(login)) {
       throw new UserServiceException();
     }
+    UserDao dao = new UserDao();
     Optional<User> loginedUser = Optional.empty();
     EntityTransaction transaction = new EntityTransaction();
     transaction.begin(dao);
@@ -55,7 +57,7 @@ public class UserServiceImpl implements UserService {
       }
       transaction.commit();
     } catch (DaoException e) {
-      e.printStackTrace();
+      logger.log(Level.ERROR, e);
     } finally {
       transaction.end();
     }

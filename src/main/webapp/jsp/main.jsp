@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${currentLocale}"/>
+<fmt:setBundle basename="locale.content"/>
 <html>
 <head>
     <title>Main</title>
@@ -10,7 +13,7 @@
 <form name="mainForm" method="post" action="controller">
     <input type="hidden" name="command" value="logout"/>
     <h3 align="center">Main</h3>
-    <p align="center">${user}, hello!</p>
+    <p align="center">${user} <fmt:message key="global.nickname" /> </p>
     <input style="margin:0 auto; display: block" type="submit" name="logout_button" value="Logout"/>
 </form>
 <form name="mainForm" method="post" action="controller">

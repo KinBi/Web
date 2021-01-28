@@ -1,13 +1,13 @@
 package com.monkeybusiness.web.controller.command;
 
 import com.monkeybusiness.web.controller.command.impl.*;
-import com.monkeybusiness.web.model.service.impl.UserServiceImpl;
 
 public enum CommandType {
-  LOGIN (new LoginCommand(new UserServiceImpl())),
+  LOGIN (new LoginCommand()),
   LOGOUT (new LogoutCommand()),
-  REGISTRATION (new RegistrationCommand(new UserServiceImpl())),
-  ADV (new AdvCommand());
+  REGISTRATION (new RegistrationCommand()),
+  ADV (new AdvertisingCommand()),
+  LOCALE (new LocaleCommand());
 
   private final Command command;
 

@@ -1,6 +1,6 @@
 package com.monkeybusiness.web.model.entity;
 
-public class User extends Entity{
+public class User implements Entity {
   public enum Role {
     ADMIN,
     USER
@@ -20,6 +20,7 @@ public class User extends Entity{
   public User(String nickname, String email, Role role) {
     this.nickname = nickname;
     this.email = email;
+    this.role = role;
   }
 
   public User(long userId, String nickname, String email, Role role) {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class UserDataValidator {
   public static final String NICKNAME_REGEX = "[а-яА-Яa-zA-Z0-9]{2,}"; // fixme
-  public static final String EMAIL_REGEX = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-z]+$"; // fixme
+  public static final String EMAIL_REGEX = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]+$"; // fixme
   public static final String PASSWORD_REGEX = "^[a-zA-Z0-9._-]+$"; // fixme
 
   private UserDataValidator() {

@@ -11,32 +11,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
 
 public class RegistrationCommand implements Command {
   private static final Logger LOGGER = LogManager.getLogger();
   private static final String ERROR_MESSAGE = "Invalid data";
-  private static final String RU = "ru";
-  private static final String EN = "en";
 
-  private final UserServiceImpl service;
-
-  public RegistrationCommand(UserServiceImpl service) {
-    this.service = service;
-  }
+  private static final UserServiceImpl service = new UserServiceImpl();
 
   @Override
   public String execute(HttpServletRequest request) {
     LOGGER.log(Level.DEBUG, "RegistrationCommand has been started");
     String page;
-    String button = request.getParameter(RequestParameter.REGISTER_BUTTON);
+    String button = request.getParameter(RequestParameter.REGISTER_BUTTON_NAME);
     if (button == null) {
-      Locale locale = request.getLocale();
-      if (locale.getLanguage().equals(RU)) {
-        Locale.setDefault(new Locale(EN));
-      } else {
-        Locale.setDefault(new Locale(RU));
-      }
       page = JspPath.TO_LOGIN;
     } else {
       String email = request.getParameter(RequestParameter.EMAIL);
