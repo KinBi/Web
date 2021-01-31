@@ -2,6 +2,7 @@ package com.monkeybusiness.web.model.service.impl;
 
 import com.monkeybusiness.web.exception.DaoException;
 import com.monkeybusiness.web.exception.UserServiceException;
+import com.monkeybusiness.web.model.dao.AbstractDao;
 import com.monkeybusiness.web.model.dao.EntityTransaction;
 import com.monkeybusiness.web.model.dao.UserDao;
 import com.monkeybusiness.web.model.entity.User;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
     UserDao dao = new UserDao();
     Optional<User> registratedUser = Optional.empty();
-    EntityTransaction transaction = new EntityTransaction();
+    EntityTransaction transaction = new EntityTransaction(); // fixme
     transaction.begin(dao);
     User user = new User(nickname, email);
     try {

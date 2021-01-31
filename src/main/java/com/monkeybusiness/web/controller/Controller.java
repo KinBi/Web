@@ -38,7 +38,7 @@ public class Controller extends HttpServlet {
     Optional<Command> optionalCommand = CommandProvider.defineCommand(request.getParameter(COMMAND));
     Command command = optionalCommand.orElseThrow(IllegalArgumentException::new);
     String page = command.execute(request);
-    LOGGER.info("|||||||||||||||||||||Request processed...|||||||||||||||||||||");
+    LOGGER.info("|||||||||||||||||||||Request processed...ЖЕКА ЛОХ|||||||||||||||||||||");
     if (page != null) {
       RequestDispatcher dispatcher = request.getRequestDispatcher(page);
       dispatcher.forward(request, response);

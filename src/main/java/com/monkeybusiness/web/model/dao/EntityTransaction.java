@@ -1,39 +1,24 @@
 package com.monkeybusiness.web.model.dao;
 
+import com.monkeybusiness.web.model.pool.ConnectionPool;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class EntityTransaction {
-  public static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
-  public static final String PROTOCOL_NAME = "jdbc";
-  public static final String SUBPROTOCOL_NAME = "mysql";
-  public static final String HOST = "//localhost";
-  public static final String PORT = "3306";
-  public static final String PATH = "/project_db";
-  public static final String COLON = ":";
+  private static final Logger LOGGER = LogManager.getLogger();
   private Connection connection;
 
   public void begin(AbstractDao dao, AbstractDao... daos) {
     if (connection == null) {
-      try {
-        Class.forName(DRIVER_NAME);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      }
-      String user = "admin";
-      String password = "admin";
-
-      String url = PROTOCOL_NAME + COLON + SUBPROTOCOL_NAME + COLON + HOST +
-              COLON + PORT + PATH;
-      try {
-        connection = DriverManager.getConnection(url, user, password);
-      } catch (SQLException throwables) {
-        throwables.printStackTrace();
-      }
+      connection = ConnectionPool.INSTANCE.getConnection();
     }
     try {
       connection.setAutoCommit(false);
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      LOGGER.log(Level.ERROR, throwables);
     }
     dao.setConnection(connection);
     for (AbstractDao daoElement : daos) {
@@ -45,7 +30,7 @@ public class EntityTransaction {
     try {
       connection.setAutoCommit(true);
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      LOGGER.log(Level.ERROR, throwables);
     }
     connection = null;
   }
@@ -54,7 +39,7 @@ public class EntityTransaction {
     try {
       connection.commit();
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      LOGGER.log(Level.ERROR, throwables);
     }
   }
 
@@ -62,7 +47,7 @@ public class EntityTransaction {
     try {
       connection.rollback();
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      LOGGER.log(Level.ERROR, throwables);
     }
   }
 }
