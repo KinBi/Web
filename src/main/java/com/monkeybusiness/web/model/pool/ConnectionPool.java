@@ -25,7 +25,7 @@ public enum ConnectionPool {
   ConnectionPool() {
     freeConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
     givenAwayConnections = new ArrayDeque<>(DEFAULT_POOL_SIZE);
-    for (int i = 0; i < freeConnections.size(); i++) {
+    for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
       Connection connection = null;
       try {
         connection = ConnectionCreator.createConnection();

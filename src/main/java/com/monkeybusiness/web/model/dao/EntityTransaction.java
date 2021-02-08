@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-
+// fixme
 public class EntityTransaction {
   private static final Logger LOGGER = LogManager.getLogger();
   private Connection connection;

@@ -39,12 +39,12 @@ public class LoginCommand implements Command {
           LOGGER.log(Level.INFO, "Login has been finished successful");
         } else {
           LOGGER.log(Level.WARN, "Login failed: Caused by Reptilian");
-          request.setAttribute(RequestParameter.REGISTRATION_ERROR_MESSAGE, ERROR_MESSAGE);
+          request.setAttribute(RequestParameter.LOGIN_PASS_ERROR_MESSAGE, ERROR_MESSAGE);
           page = JspPath.TO_LOGIN;
         }
       } catch (UserServiceException e) {
         LOGGER.log(Level.ERROR, e);
-        request.setAttribute(RequestParameter.REGISTRATION_ERROR_MESSAGE, ERROR_MESSAGE);
+        request.setAttribute(RequestParameter.LOGIN_PASS_ERROR_MESSAGE, ERROR_MESSAGE);
         page = JspPath.TO_LOGIN;
       }
     }

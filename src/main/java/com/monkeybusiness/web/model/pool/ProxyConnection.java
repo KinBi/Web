@@ -15,7 +15,7 @@ public class ProxyConnection implements Connection {
   private Connection connection;
 
   ProxyConnection(Connection connection) {
-//    this.connection = connection;
+    this.connection = connection;
   }
 
   @Override
@@ -68,7 +68,7 @@ public class ProxyConnection implements Connection {
     }
   }
 
-  void reallyClose() throws SQLException{
+  void reallyClose() throws SQLException {
     try {
       connection.close();
     } catch (SQLException throwables) {
