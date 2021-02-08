@@ -20,7 +20,7 @@ public enum ConnectionPool {
   private BlockingQueue<ProxyConnection> freeConnections;
   private Queue<ProxyConnection> givenAwayConnections;
 
-  private static final int DEFAULT_POOL_SIZE = 32;
+  private static final int DEFAULT_POOL_SIZE = 8;
 
   ConnectionPool() {
     freeConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);

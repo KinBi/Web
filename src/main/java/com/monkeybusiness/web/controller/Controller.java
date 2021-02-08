@@ -3,6 +3,7 @@ package com.monkeybusiness.web.controller;
 import com.monkeybusiness.web.controller.command.Command;
 import com.monkeybusiness.web.controller.command.CommandProvider;
 
+import com.monkeybusiness.web.model.pool.ConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,7 @@ public class Controller extends HttpServlet {
 
   @Override
   public void init() {
-    // init
+    // init smth
   }
 
   @Override
@@ -38,7 +39,7 @@ public class Controller extends HttpServlet {
     Optional<Command> optionalCommand = CommandProvider.defineCommand(request.getParameter(COMMAND));
     Command command = optionalCommand.orElseThrow(IllegalArgumentException::new);
     String page = command.execute(request);
-    LOGGER.info("|||||||||||||||||||||Request processed...ЖЕКА ЛОХ|||||||||||||||||||||");
+    LOGGER.info("|||||||||||||||||||||Request processed...|||||||||||||||||||||");
     if (page != null) {
       RequestDispatcher dispatcher = request.getRequestDispatcher(page);
       dispatcher.forward(request, response);
@@ -50,6 +51,6 @@ public class Controller extends HttpServlet {
 
   @Override
   public void destroy() {
-    // destroy
+    ConnectionPool.INSTANCE.destroyPool();
   }
 }

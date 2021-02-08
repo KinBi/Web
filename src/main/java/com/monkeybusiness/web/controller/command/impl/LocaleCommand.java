@@ -1,12 +1,11 @@
 package com.monkeybusiness.web.controller.command.impl;
 
 import com.monkeybusiness.web.controller.command.Command;
-import com.monkeybusiness.web.controller.command.JspPath;
 import com.monkeybusiness.web.controller.command.RequestParameter;
+import com.monkeybusiness.web.controller.command.SessionParameter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
 
 public class LocaleCommand implements Command {
   public static final String EN = "en";
@@ -14,15 +13,20 @@ public class LocaleCommand implements Command {
 
   @Override
   public String execute(HttpServletRequest request) {
+    String page = request.getParameter(RequestParameter.CURRENT_PAGE);
+    String lang = request.getParameter(RequestParameter.LOCALE_BUTTON);
     HttpSession session = request.getSession();
-    Locale locale = (Locale) session.getAttribute(RequestParameter.CURRENT_LOCALE);
-    if (locale == null || locale.getLanguage().equals(EN)) {
-      locale = new Locale(RU);
-    } else {
-      locale = new Locale(EN);
+    String locale;
+    switch (lang) {
+      case RU:
+        locale = RU;
+        break;
+      default:
+        locale = EN;
+        break;
     }
-    session.setAttribute(RequestParameter.CURRENT_LOCALE, locale);
-//    return session.getServletContext().getContextPath(); // fixme
-    return request.getHeader("referer"); // fixme
+    session.setAttribute(SessionParameter.CURRENT_LOCALE, locale);
+    page = page.substring(request.getContextPath().length());
+    return page;
   }
 }
