@@ -14,9 +14,9 @@
 <div style="width: 400px;
             padding: 20px; alignment: left">
     <form method="post" action="controller">
-        <input type="hidden" name="command" value="login"/>
-        <button class="btn btn-outline-light" type="submit" name="registration_button"><fmt:message
-                key="global.registration_button"/></button>
+        <input type="hidden" name="command" value="to_registration"/>
+        <button class="btn btn-outline-light" type="submit">
+            <fmt:message key="global.registration_button"/></button>
     </form>
     <form method="post" action="controller">
         <input type="hidden" name="command" value="login"/>
@@ -25,8 +25,8 @@
         <p class="text-log-reg"><fmt:message key="global.password"/></p>
         <input class="textarea-log-reg" type="password" name="password" placeholder="password"/>
         <br/>${errorLoginPassMessage}<br/>
-        <button class="btn btn-outline-dark" style="margin-left: auto; display: block" type="submit"
-                name="login_button"><fmt:message key="global.login_button"/></button>
+        <button class="btn btn-outline-dark" style="margin-left: auto; display: block" type="submit">
+            <fmt:message key="global.login_button"/></button>
     </form>
 </div>
 </body>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="locale.content"/>
 <html>
@@ -10,18 +11,12 @@
 <body>
 <jsp:include page="../jsp/part/background.jsp"/>
 <%@include file="../jsp/part/header.jsp" %>
-
 <div style="width: 400px;
             padding: 20px; alignment: left">
     <form method="post" action="controller">
-        <input type="hidden" name="command" value="locale"/>
-        <button type="submit" name="login_button" class="btn btn-outline-light"><fmt:message
-                key="global.login_button"/></button>
-    </form>
-    <form method="post" action="controller">
-        <input type="hidden" name="command" value="registration"/>
-        <button type="submit" name="login_button" class="btn btn-outline-light"><fmt:message
-                key="global.login_button"/></button>
+        <input type="hidden" name="command" value="to_login"/>
+        <button type="submit" class="btn btn-outline-light">
+            <fmt:message key="global.login_button"/></button>
     </form>
     <form method="post" action="controller">
         <input type="hidden" name="command" value="registration"/>
@@ -40,9 +35,11 @@
                required pattern="^(?=.*[a-z])(?=.*[A-Z]+)(?=.*[0-9])[a-zA-Z0-9]{6,30}$" title=<fmt:message
                 key="registration.password_title"/>/>
         <br/>${errorRegistrationMessage}<br/>
-        <button class="btn btn-outline-dark" style="margin-left: auto; display: block" type="submit"
-                name="register_button"><fmt:message key="global.register_button"/></button>
+        <button class="btn btn-outline-dark" style="margin-left: auto; display: block" type="submit">
+            <fmt:message key="global.register_button"/></button>
     </form>
+
+<jsp:include page="secured/userList.jsp" />
 </div>
 </body>
 </html>

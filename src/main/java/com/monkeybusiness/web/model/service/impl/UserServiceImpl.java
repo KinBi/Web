@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -63,6 +65,23 @@ public class UserServiceImpl implements UserService {
       transaction.end();
     }
     return loginedUser;
+  }
+
+  @Override
+  public List<User> findAllUsers() throws UserServiceException {
+    UserDao dao = new UserDao();
+    List<User> userList = new ArrayList<>();
+    EntityTransaction transaction = new EntityTransaction();
+    transaction.begin(dao);
+    try {
+      userList = dao.findAll();
+      transaction.commit();
+    } catch (DaoException e) {
+      logger.log(Level.ERROR, e);
+    } finally {
+      transaction.end();
+    }
+    return userList;
   }
 }
 

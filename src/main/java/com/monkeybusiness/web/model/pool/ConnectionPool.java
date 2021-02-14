@@ -30,7 +30,7 @@ public enum ConnectionPool {
       try {
         connection = ConnectionCreator.createConnection();
       } catch (SQLException throwables) {
-        throw new RuntimeException("Connections hasn't been created");
+        throw new RuntimeException("Connections hasn't been created", throwables);
       }
       ProxyConnection proxyConnection = new ProxyConnection(connection);
       freeConnections.offer(proxyConnection);

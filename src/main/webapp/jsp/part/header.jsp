@@ -34,6 +34,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <input type="hidden" name="command" value="locale"/>
+<%--                fixme--%>
                 <input type="hidden" name="currentPage" value="${pageContext.request.requestURI}" />
                 <li>
                     <button type="submit" class="dropdown-item" name="localeButton" value="en"><fmt:message key="global.en" /></button>

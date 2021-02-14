@@ -1,33 +1,36 @@
 package com.monkeybusiness.web.controller.filter;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
-@WebFilter(filterName = "Encoding", urlPatterns = {"/*"},
-        initParams = {@WebInitParam(name = "encoding", value = "UTF-8",
-                description = "Encoding Param")})
+@WebFilter (urlPatterns = {"/*"})
 public class EncodingFilter implements Filter {
-  private String code;
-
-  @Override
-  public void destroy() {
-    // destroy
-  }
-
-  @Override
-  public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-    String codeRequest = req.getCharacterEncoding();
-    if (codeRequest == null || !codeRequest.equalsIgnoreCase(code)) {
-      req.setCharacterEncoding(code);
-      resp.setCharacterEncoding(code);
-    }
-    chain.doFilter(req, resp);
-  }
+  private static final Logger LOGGER = LogManager.getLogger();
+  private static final String encoding = "UTF-8";
 
   @Override
   public void init(FilterConfig config) throws ServletException {
-    code = config.getInitParameter("encoding");
+    // todo init
+  }
+
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    LOGGER.log(Level.DEBUG, "EncodingFilter filtering");
+    String codeRequest = request.getCharacterEncoding();
+    if (codeRequest == null || !codeRequest.equalsIgnoreCase(encoding)) {
+      request.setCharacterEncoding(encoding);
+      response.setCharacterEncoding(encoding);
+    }
+    filterChain.doFilter(request, response);
+  }
+
+  @Override
+  public void destroy() {
+    // todo destroy
   }
 }

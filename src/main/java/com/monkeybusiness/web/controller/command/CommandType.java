@@ -7,7 +7,12 @@ public enum CommandType {
   LOGOUT (new LogoutCommand()),
   REGISTRATION (new RegistrationCommand()),
   ADV (new AdvertisingCommand()),
-  LOCALE (new LocaleCommand());
+  LOCALE (new LocaleCommand()),
+  USER (new UserCommand()),
+  TO_LOGIN (new ToLoginCommand()),
+  TO_REGISTRATION (new ToRegistrationCommand()),
+  TO_ADMIN_PAGE (new ToAdminPageCommand()),
+  TO_USER_LIST (new ToUserListCommand());
 
   private final Command command;
 

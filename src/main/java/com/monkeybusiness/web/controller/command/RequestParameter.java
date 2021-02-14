@@ -10,9 +10,7 @@ public class RequestParameter {
   public static final String LOGIN_PASS_ERROR_MESSAGE = "errorLoginPassMessage";
   public static final String CURRENT_PAGE = "currentPage";
   public static final String LOCALE_BUTTON = "localeButton";
-  public static final String REGISTER_BUTTON_NAME = "register_button";
-  public static final String LOGIN_BUTTON_NAME = "login_button";
-  public static final String REGISTRATION_BUTTON_NAME = "registration_button";
+  public static final String USER_LIST = "userList";
 
   private RequestParameter() {
   }

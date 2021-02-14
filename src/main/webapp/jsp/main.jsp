@@ -13,11 +13,12 @@
 <form method="post" action="controller">
     <input type="hidden" name="command" value="logout"/>
     <h3 align="center">Main</h3>
-    <p align="center">${user} <fmt:message key="global.nickname" /> </p>
-    <input style="margin:0 auto; display: block" type="submit" name="logout_button" value="Logout"/>
+    <p align="center">${sessionScope.user.nickname} <fmt:message key="global.nickname" /> </p>
+<%--    fixme--%>
+    <input style="margin:0 auto; display: block" type="submit" value="Logout"/>
 </form>
 <form method="post" action="controller">
-    <input type="hidden" name="command" value="adv">
+    <input type="hidden" name="command" value="adv"/>
     <h1 align="center">Билл Гейтс был восхищён, когда узнал...</h1>
     <%--            <input style="margin:0 auto; display: block" type="image" img src="https://memepedia.ru/wp-content/uploads/2019/06/stonks-template.png"--%>
     <%--                 alt="Здесь могла бы быть ваша реклама"/>--%>
@@ -25,6 +26,11 @@
         <img style="opacity:75%; margin:0 auto; display:block"
              src="https://memepedia.ru/wp-content/uploads/2019/06/stonks-template.png"
              alt="Здесь могла бы быть ваша реклама" /></a>
+</form>
+<form method="post" action="controller">
+    <input type="hidden" name="command" value="to_admin_page"/>
+<%--    fixme--%>
+    <button class="btn btn-outline-light" type="submit">onlyForAdmin</button>
 </form>
 </body>
 </html>

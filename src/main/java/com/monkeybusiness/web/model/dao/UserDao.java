@@ -6,11 +6,12 @@ import com.monkeybusiness.web.model.entity.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class UserDao extends AbstractDao<User> {
-  private static final String SQL_FIND_ALL = "SELECT user_id, nickname, email, password, role FROM users";
+  private static final String SQL_FIND_ALL = "SELECT user_id, nickname, email, user_role FROM users";
   private static final String SQL_CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
   private static final String SQL_FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
           "WHERE (nickname LIKE ? OR email LIKE ?) AND password LIKE ? LIMIT 1";
@@ -18,7 +19,21 @@ public class UserDao extends AbstractDao<User> {
 
   @Override
   public List<User> findAll() throws DaoException {
-    return null; // todo
+    List<User> userList = new ArrayList<>();
+    try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL)) {
+      ResultSet resultSet = statement.executeQuery();
+      while (resultSet.next()) {
+        long id = resultSet.getLong(1);
+        String nickname = resultSet.getString(2);
+        String email = resultSet.getString(3);
+        User.Role role = User.Role.valueOf(resultSet.getString(4).toUpperCase(Locale.ROOT));
+        User user = new User(id, nickname, email, role);
+        userList.add(user);
+      }
+    } catch (SQLException throwables) {
+      throw new DaoException(throwables);
+    }
+    return userList; // todo
   }
 
   @Override
@@ -28,10 +43,8 @@ public class UserDao extends AbstractDao<User> {
 
   @Override
   public boolean exists(User entity) throws DaoException {
-    PreparedStatement statement = null;
     boolean exists = false;
-    try {
-      statement = connection.prepareStatement(SQL_CHECK_USER_EXISTANCE);
+    try (PreparedStatement statement = connection.prepareStatement(SQL_CHECK_USER_EXISTANCE)){
       statement.setString(1, entity.getNickname());
       statement.setString(2, entity.getEmail());
       ResultSet resultSet = statement.executeQuery();
@@ -40,17 +53,13 @@ public class UserDao extends AbstractDao<User> {
       }
     } catch (SQLException throwables) {
       throw new DaoException(throwables);
-    } finally {
-      close(statement);
     }
     return exists;
   }
 
   public boolean login(User entity, String password) throws DaoException {
-    PreparedStatement statement = null;
     boolean logined = false;
-    try {
-      statement = connection.prepareStatement(SQL_FIND_USER);
+    try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER)){
       statement.setString(1, entity.getNickname());
       statement.setString(2, entity.getEmail());
       statement.setString(3, password);
@@ -64,8 +73,6 @@ public class UserDao extends AbstractDao<User> {
       }
     } catch (SQLException throwables) {
       throw new DaoException(throwables);
-    } finally {
-      close(statement);
     }
     return logined;
   }
@@ -77,11 +84,9 @@ public class UserDao extends AbstractDao<User> {
 
   @Override
   public boolean create(User entity, String... params) throws DaoException {
-    PreparedStatement statement = null;
     boolean created = false;
     if (!exists(entity)) {
-      try {
-        statement = connection.prepareStatement(SQL_CREATE_USER);
+      try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_USER)) {
         statement.setString(1, entity.getNickname());
         statement.setString(2, entity.getEmail());
         statement.setString(3, params[0]);
@@ -90,8 +95,6 @@ public class UserDao extends AbstractDao<User> {
         created = true;
       } catch (SQLException throwables) {
         throw new DaoException(throwables);
-      } finally {
-        close(statement);
       }
     }
     return created;
