@@ -18,7 +18,8 @@ import javax.servlet.annotation.*;
 @WebServlet(urlPatterns = {"/controller", "*.do"})
 public class Controller extends HttpServlet {
   private static final Logger LOGGER = LogManager.getLogger();
-  public static final String COMMAND = "command";
+  private static final String COMMAND = "command";
+  private static final int ERROR_CODE = 404;
 
   @Override
   public void init() {
@@ -41,11 +42,13 @@ public class Controller extends HttpServlet {
     String page = command.execute(request);
     LOGGER.info("|||||||||||||||||||||Request processed...|||||||||||||||||||||");
     if (page != null) {
-      RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-      dispatcher.forward(request, response);
+      request.getSession().setAttribute(SessionParameter.CURRENT_PAGE_URL, page);
+//      RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+//      dispatcher.forward(request, response);
+      response.sendRedirect(request.getContextPath() + page);
     } else {
       LOGGER.log(Level.ERROR, "Page is not found");
-      response.sendRedirect("404");
+      response.sendError(ERROR_CODE);
     }
   }
 

@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class ConnectionCreator {
   private static final Logger LOGGER = LogManager.getLogger();
-  private static final String DBCONFIG_PATH = "/config/config.properties";
+  private static final String DBCONFIG_PATH = "/config/database.properties";
   private static final Properties properties = new Properties();
   private static final String URL_ATTRIBUTE = "db.url";
   private static final String DRIVER_ATTRIBUTE = "db.driver";

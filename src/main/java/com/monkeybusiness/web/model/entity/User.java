@@ -3,13 +3,20 @@ package com.monkeybusiness.web.model.entity;
 public class User implements Entity {
   public enum Role {
     ADMIN,
-    USER
+    USER,
+    GUEST
   }
 
   private long userId;
   private String nickname;
   private String email;
+  private long score;
+  private double cash;
   private Role role;
+
+  public User() {
+    this.role = Role.USER;
+  }
 
   public User(String nickname, String email) {
     this.nickname = nickname;
@@ -17,16 +24,28 @@ public class User implements Entity {
     this.role = Role.USER;
   }
 
-  public User(String nickname, String email, Role role) {
+  public User(String nickname, String email, long score, double cash) {
     this.nickname = nickname;
     this.email = email;
+    this.score = score;
+    this.cash = cash;
+    this.role = Role.USER;
+  }
+
+  public User(String nickname, String email, long score, double cash, Role role) {
+    this.nickname = nickname;
+    this.email = email;
+    this.score = score;
+    this.cash = cash;
     this.role = role;
   }
 
-  public User(long userId, String nickname, String email, Role role) {
+  public User(long userId, String nickname, String email, long score, double cash, Role role) {
     this.userId = userId;
     this.nickname = nickname;
     this.email = email;
+    this.score = score;
+    this.cash = cash;
     this.role = role;
   }
 
@@ -36,6 +55,22 @@ public class User implements Entity {
 
   public void setUserId(long userId) {
     this.userId = userId;
+  }
+
+  public long getScore() {
+    return score;
+  }
+
+  public void setScore(long score) {
+    this.score = score;
+  }
+
+  public double getCash() {
+    return cash;
+  }
+
+  public void setCash(double cash) {
+    this.cash = cash;
   }
 
   public String getNickname() {

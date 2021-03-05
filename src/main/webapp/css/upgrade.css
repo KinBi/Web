@@ -10,3 +10,16 @@
     margin-top: 3px;
     margin-bottom: 1px;
 }
+
+.nav-m-p {
+    margin: 1px;
+    padding-bottom: 3px;
+}
+
+.round-img {
+    border-radius: 100px;
+    margin: 3px;
+    width: 40px;
+    height: 40px;
+    background-size: 10px;
+}

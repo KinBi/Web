@@ -1,7 +1,7 @@
 package com.monkeybusiness.web.controller.command.impl;
 
 import com.monkeybusiness.web.controller.command.Command;
-import com.monkeybusiness.web.controller.command.JspPath;
+import com.monkeybusiness.web.controller.JspPath;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

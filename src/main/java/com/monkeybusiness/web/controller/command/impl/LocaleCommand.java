@@ -1,8 +1,8 @@
 package com.monkeybusiness.web.controller.command.impl;
 
 import com.monkeybusiness.web.controller.command.Command;
-import com.monkeybusiness.web.controller.command.RequestParameter;
-import com.monkeybusiness.web.controller.command.SessionParameter;
+import com.monkeybusiness.web.controller.RequestParameter;
+import com.monkeybusiness.web.controller.SessionParameter;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,9 +18,9 @@ public class LocaleCommand implements Command {
   @Override
   public String execute(HttpServletRequest request) {
     LOGGER.log(Level.DEBUG, "LocaleCommand has been started");
-    String page = request.getParameter(RequestParameter.CURRENT_PAGE);
     String lang = request.getParameter(RequestParameter.LOCALE_BUTTON);
     HttpSession session = request.getSession();
+    String page = (String) session.getAttribute(SessionParameter.CURRENT_PAGE_URL);
     String locale;
     switch (lang) {
       case RU:
@@ -31,7 +31,6 @@ public class LocaleCommand implements Command {
         break;
     }
     session.setAttribute(SessionParameter.CURRENT_LOCALE, locale);
-    page = page.substring(request.getContextPath().length());
     return page;
   }
 }

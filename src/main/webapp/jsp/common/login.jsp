@@ -4,13 +4,12 @@
 <fmt:setBundle basename="locale.content"/>
 <html>
 <head>
-    <title>Login</title>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/upgrade.css" type="text/css" rel="stylesheet">
+    <title><fmt:message key="login.pageTitle" /></title>
+    <link href="${pageContext.request.contextPath}/css/upgrade.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../jsp/part/background.jsp"/>
-<%@ include file="../jsp/part/header.jsp" %>
+<jsp:include page="/jsp/part/background.jsp"/>
+<jsp:include page="/jsp/part/header.jsp" />
 <div style="width: 400px;
             padding: 20px; alignment: left">
     <form method="post" action="controller">
@@ -19,6 +18,7 @@
             <fmt:message key="global.registration_button"/></button>
     </form>
     <form method="post" action="controller">
+        <input name="ctoken" type="hidden" value="${stoken}"/>
         <input type="hidden" name="command" value="login"/>
         <p class="text-log-reg"><fmt:message key="global.login"/></p>
         <input class="textarea-log-reg" type="text" name="login" placeholder="somelogin"/>

@@ -12,6 +12,7 @@ public enum CommandType {
   TO_LOGIN (new ToLoginCommand()),
   TO_REGISTRATION (new ToRegistrationCommand()),
   TO_ADMIN_PAGE (new ToAdminPageCommand()),
+  TO_PROFILE (new ToProfileCommand()),
   TO_USER_LIST (new ToUserListCommand());
 
   private final Command command;

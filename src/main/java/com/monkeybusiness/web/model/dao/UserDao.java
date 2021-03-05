@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class UserDao extends AbstractDao<User> {
-  private static final String SQL_FIND_ALL = "SELECT user_id, nickname, email, user_role FROM users";
+  private static final String SQL_FIND_ALL = "SELECT user_id, nickname, email, score, cash, user_role FROM users";
   private static final String SQL_CHECK_USER_EXISTANCE = "SELECT TRUE FROM users WHERE (nickname LIKE ? OR email LIKE ?) LIMIT 1";
-  private static final String SQL_FIND_USER = "SELECT user_id, nickname, email, user_role FROM users " +
+  private static final String SQL_FIND_USER = "SELECT user_id, nickname, email, score, cash, user_role FROM users " +
           "WHERE (nickname LIKE ? OR email LIKE ?) AND password LIKE ? LIMIT 1";
   private static final String SQL_CREATE_USER = "INSERT INTO users (nickname, email, password, user_role) VALUES (?, ?, ?, ?) ";
 
@@ -26,14 +26,16 @@ public class UserDao extends AbstractDao<User> {
         long id = resultSet.getLong(1);
         String nickname = resultSet.getString(2);
         String email = resultSet.getString(3);
-        User.Role role = User.Role.valueOf(resultSet.getString(4).toUpperCase(Locale.ROOT));
-        User user = new User(id, nickname, email, role);
+        long score = resultSet.getLong(4);
+        double cash = resultSet.getDouble(5);
+        User.Role role = User.Role.valueOf(resultSet.getString(6).toUpperCase(Locale.ROOT));
+        User user = new User(id, nickname, email, score, cash, role);
         userList.add(user);
       }
     } catch (SQLException throwables) {
       throw new DaoException(throwables);
     }
-    return userList; // todo
+    return userList;
   }
 
   @Override
@@ -69,7 +71,9 @@ public class UserDao extends AbstractDao<User> {
         entity.setUserId(resultSet.getLong(1));
         entity.setNickname(resultSet.getString(2));
         entity.setEmail(resultSet.getString(3));
-        entity.setRole(User.Role.valueOf(resultSet.getString(4).toUpperCase(Locale.ROOT)));
+        entity.setScore(resultSet.getLong(4));
+        entity.setCash(resultSet.getDouble(5));
+        entity.setRole(User.Role.valueOf(resultSet.getString(6).toUpperCase(Locale.ROOT)));
       }
     } catch (SQLException throwables) {
       throw new DaoException(throwables);

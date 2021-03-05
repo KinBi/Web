@@ -1,10 +1,9 @@
 package com.monkeybusiness.web.controller.command.impl;
 
+import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.controller.command.Command;
-import com.monkeybusiness.web.controller.command.JspPath;
+import com.monkeybusiness.web.controller.JspPath;
 
-import com.monkeybusiness.web.controller.command.SessionParameter;
-import com.monkeybusiness.web.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +17,7 @@ public class LogoutCommand implements Command {
   @Override
   public String execute(HttpServletRequest request) {
     LOGGER.log(Level.DEBUG, "LogoutCommand has been started");
-    String page = JspPath.TO_LOGIN;
+    String page = UrlPath.LOGIN;
     HttpSession session = request.getSession();
     session.invalidate();
     return page;

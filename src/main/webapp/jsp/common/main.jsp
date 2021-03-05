@@ -4,16 +4,16 @@
 <fmt:setBundle basename="locale.content"/>
 <html>
 <head>
-    <title>Main</title>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <title><fmt:message key="main.pageTitle" /></title>
+    <link href="${pageContext.request.contextPath}/css/upgrade.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../jsp/part/background.jsp"/>
-<%@include file="../jsp/part/header.jsp" %>
+<jsp:include page="/jsp/part/background.jsp"/>
+<jsp:include page="/jsp/part/header.jsp" />
 <form method="post" action="controller">
     <input type="hidden" name="command" value="logout"/>
     <h3 align="center">Main</h3>
-    <p align="center">${sessionScope.user.nickname} <fmt:message key="global.nickname" /> </p>
+    <p align="center"><fmt:message key="global.nickname" /> ${sessionScope.nickname}</p>
 <%--    fixme--%>
     <input style="margin:0 auto; display: block" type="submit" value="Logout"/>
 </form>
@@ -26,11 +26,6 @@
         <img style="opacity:75%; margin:0 auto; display:block"
              src="https://memepedia.ru/wp-content/uploads/2019/06/stonks-template.png"
              alt="Здесь могла бы быть ваша реклама" /></a>
-</form>
-<form method="post" action="controller">
-    <input type="hidden" name="command" value="to_admin_page"/>
-<%--    fixme--%>
-    <button class="btn btn-outline-light" type="submit">onlyForAdmin</button>
 </form>
 </body>
 </html>
