@@ -54,7 +54,7 @@
             </div>
         </c:if>
 
-        <form class="btn-group dropstart nav-m-p" method="post" action="controller">
+        <form class="btn-group dropstart nav-m-p" method="post" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="locale"/>
             <button type="button" class="btn btn-secondary dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false"><fmt:message key="navbar.lang"/>
@@ -71,7 +71,6 @@
             </ul>
         </form>
     </div>
-
 </nav>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </body>
