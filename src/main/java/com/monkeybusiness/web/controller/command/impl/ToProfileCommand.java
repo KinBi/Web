@@ -1,7 +1,5 @@
 package com.monkeybusiness.web.controller.command.impl;
 
-import com.monkeybusiness.web.controller.JspPath;
-import com.monkeybusiness.web.controller.SessionParameter;
 import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.controller.command.Command;
 import org.apache.logging.log4j.Level;

@@ -2,7 +2,6 @@ package com.monkeybusiness.web.controller.command.impl;
 
 import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.controller.command.Command;
-import com.monkeybusiness.web.controller.JspPath;
 import com.monkeybusiness.web.controller.RequestParameter;
 import com.monkeybusiness.web.controller.SessionParameter;
 import com.monkeybusiness.web.exception.UserServiceException;
