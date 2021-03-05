@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.util.Optional;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -43,8 +42,6 @@ public class Controller extends HttpServlet {
     LOGGER.info("|||||||||||||||||||||Request processed...|||||||||||||||||||||");
     if (page != null) {
       request.getSession().setAttribute(SessionParameter.CURRENT_PAGE_URL, page);
-//      RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-//      dispatcher.forward(request, response);
       response.sendRedirect(request.getContextPath() + page);
     } else {
       LOGGER.log(Level.ERROR, "Page is not found");

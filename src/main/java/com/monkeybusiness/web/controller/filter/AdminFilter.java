@@ -32,8 +32,7 @@ public class AdminFilter implements Filter {
     HttpSession session = request.getSession();
     User.Role role = (User.Role) session.getAttribute(SessionParameter.USER_ROLE);
     if (role == null || !role.equals(User.Role.ADMIN)) {
-      String page = (String) session.getAttribute(SessionParameter.CURRENT_PAGE_URL);
-      LOGGER.log(Level.DEBUG, "User not admin " + page);
+      LOGGER.log(Level.DEBUG, "User not admin");
       response.sendError(ERROR_404);
     }
     filterChain.doFilter(request, response);
