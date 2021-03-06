@@ -60,7 +60,7 @@ public enum UserServiceImpl implements UserService {
 
   @Override
   public List<User> findAllUsers() throws UserServiceException {
-    List<User> userList = new ArrayList<>();
+    List<User> userList;
     try {
       userList = userDao.findAll();
     } catch (DaoException e) {
