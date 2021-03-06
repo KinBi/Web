@@ -29,7 +29,7 @@
 
             <%--            fixme--%>
             <c:if test="${sessionScope.role ne 'GUEST'}">
-                <form class="nav-item nav-m-p" method="post" action="controller">
+                <form class="nav-item nav-m-p" method="post" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="to_profile"/>
                     <a type="submit" class="nav-link" href="${pageContext.request.contextPath}/user/profile">
                         <fmt:message key="global.profile"/>
@@ -38,7 +38,7 @@
             </c:if>
 
             <c:if test="${sessionScope.role eq 'ADMIN'}">
-                <form class="nav-item nav-m-p" method="post" action="controller">
+                <form class="nav-item nav-m-p" method="post" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="to_admin_page"/>
                         <%--    fixme--%>
                     <a class="nav-link" href="${pageContext.request.contextPath}/admin/adminPage">

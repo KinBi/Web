@@ -2,9 +2,8 @@ package com.monkeybusiness.web.model.service.impl;
 
 import com.monkeybusiness.web.exception.DaoException;
 import com.monkeybusiness.web.exception.UserServiceException;
-import com.monkeybusiness.web.model.dao.AbstractDao;
-import com.monkeybusiness.web.model.dao.EntityTransaction;
 import com.monkeybusiness.web.model.dao.UserDao;
+import com.monkeybusiness.web.model.dao.impl.UserDaoImpl;
 import com.monkeybusiness.web.model.entity.User;
 import com.monkeybusiness.web.model.service.UserService;
 import com.monkeybusiness.web.validator.UserDataValidator;
@@ -17,31 +16,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImpl implements UserService {
+public enum UserServiceImpl implements UserService {
+  INSTANCE;
+
   private static final Logger logger = LogManager.getLogger();
+  private final UserDao userDao = UserDaoImpl.INSTANCE;
 
   @Override
   public Optional<User> registrate(String nickname, String email, String password) throws UserServiceException {
     if (!UserDataValidator.isUserValid(nickname, email, password)) {
       throw new UserServiceException();
     }
-    UserDao dao = new UserDao();
-    Optional<User> registratedUser = Optional.empty();
-    EntityTransaction transaction = new EntityTransaction(); // fixme
-    transaction.begin(dao);
+    Optional<User> registeredUser = Optional.empty();
     User user = new User(nickname, email);
     try {
-      if (dao.create(user, password)) {
-        registratedUser = Optional.of(user);
+      if (userDao.create(user, password)) {
+        registeredUser = Optional.of(user);
       }
-      transaction.commit();
     } catch (DaoException e) {
       logger.log(Level.ERROR, e);
-    } finally {
-      transaction.end();
+      throw new UserServiceException(e);
     }
-
-    return registratedUser;
+    return registeredUser;
   }
 
   @Override
@@ -49,37 +45,27 @@ public class UserServiceImpl implements UserService {
     if (!UserDataValidator.isLoginValid(login)) {
       throw new UserServiceException();
     }
-    UserDao dao = new UserDao();
     Optional<User> loginedUser = Optional.empty();
-    EntityTransaction transaction = new EntityTransaction();
-    transaction.begin(dao);
     User user = new User(login, login);
     try {
-      if (dao.login(user, password)) {
+      if (userDao.login(user, password)) {
         loginedUser = Optional.of(user);
       }
-      transaction.commit();
     } catch (DaoException e) {
       logger.log(Level.ERROR, e);
-    } finally {
-      transaction.end();
+      throw new UserServiceException(e);
     }
     return loginedUser;
   }
 
   @Override
   public List<User> findAllUsers() throws UserServiceException {
-    UserDao dao = new UserDao();
     List<User> userList = new ArrayList<>();
-    EntityTransaction transaction = new EntityTransaction();
-    transaction.begin(dao);
     try {
-      userList = dao.findAll();
-      transaction.commit();
+      userList = userDao.findAll();
     } catch (DaoException e) {
       logger.log(Level.ERROR, e);
-    } finally {
-      transaction.end();
+      throw new UserServiceException(e);
     }
     return userList;
   }

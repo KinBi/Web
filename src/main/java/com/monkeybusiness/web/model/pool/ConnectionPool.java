@@ -19,7 +19,6 @@ public enum ConnectionPool {
   private static final Logger LOGGER = LogManager.getLogger();
   private BlockingQueue<ProxyConnection> freeConnections;
   private Queue<ProxyConnection> givenAwayConnections;
-
   private static final int DEFAULT_POOL_SIZE = 8;
 
   ConnectionPool() {

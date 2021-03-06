@@ -6,6 +6,7 @@ import com.monkeybusiness.web.controller.RequestParameter;
 import com.monkeybusiness.web.controller.SessionParameter;
 import com.monkeybusiness.web.exception.UserServiceException;
 import com.monkeybusiness.web.model.entity.User;
+import com.monkeybusiness.web.model.service.UserService;
 import com.monkeybusiness.web.model.service.impl.UserServiceImpl;
 
 import org.apache.logging.log4j.Level;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class LoginCommand implements Command {
   private static final Logger LOGGER = LogManager.getLogger();
   private static final String ERROR_MESSAGE = "Invalid datata, I'm blue da ba dee da ba die";
-  private static final UserServiceImpl service = new UserServiceImpl();
+  private static final UserService service = UserServiceImpl.INSTANCE;
 
   @Override
   public String execute(HttpServletRequest request) {
