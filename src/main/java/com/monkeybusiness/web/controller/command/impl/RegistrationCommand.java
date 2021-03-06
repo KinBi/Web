@@ -32,7 +32,7 @@ public class RegistrationCommand implements Command {
     String nickname = request.getParameter(RequestParameter.NICKNAME);
     String password = request.getParameter(RequestParameter.PASSWORD);
     try {
-      Optional<User> optionalUser = service.registrate(nickname, email, password);
+      Optional<User> optionalUser = service.register(nickname, email, password);
       if (optionalUser.isPresent()) {
         User user = optionalUser.get();
         session.setAttribute(SessionParameter.USER_ROLE, user.getRole());

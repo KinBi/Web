@@ -23,7 +23,7 @@ public enum UserServiceImpl implements UserService {
   private final UserDao userDao = UserDaoImpl.INSTANCE;
 
   @Override
-  public Optional<User> registrate(String nickname, String email, String password) throws UserServiceException {
+  public Optional<User> register(String nickname, String email, String password) throws UserServiceException {
     if (!UserDataValidator.isUserValid(nickname, email, password)) {
       throw new UserServiceException();
     }
