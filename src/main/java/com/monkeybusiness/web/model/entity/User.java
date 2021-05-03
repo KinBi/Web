@@ -12,6 +12,8 @@ public class User implements Entity {
   private String email;
   private long score;
   private double cash;
+  private String image = "C:\\MonkeybusinessWebFirstStorage\\userImages\\default.jpg";
+  private boolean enabled = true;
   private Role role;
 
   public User() {
@@ -32,20 +34,23 @@ public class User implements Entity {
     this.role = Role.USER;
   }
 
-  public User(String nickname, String email, long score, double cash, Role role) {
+  public User(String nickname, String email, long score, double cash, String image, Role role) {
     this.nickname = nickname;
     this.email = email;
     this.score = score;
     this.cash = cash;
+    this.image = image;
     this.role = role;
   }
 
-  public User(long userId, String nickname, String email, long score, double cash, Role role) {
+  public User(long userId, String nickname, String email, long score, double cash, String image, boolean enabled, Role role) {
     this.userId = userId;
     this.nickname = nickname;
     this.email = email;
     this.score = score;
     this.cash = cash;
+    this.image = image;
+    this.enabled = enabled;
     this.role = role;
   }
 
@@ -87,6 +92,22 @@ public class User implements Entity {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 
   public Role getRole() {

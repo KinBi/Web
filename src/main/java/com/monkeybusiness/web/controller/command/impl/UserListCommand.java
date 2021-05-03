@@ -1,5 +1,7 @@
 package com.monkeybusiness.web.controller.command.impl;
 
+import com.monkeybusiness.web.controller.SessionAttribute;
+import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.controller.command.Command;
 import com.monkeybusiness.web.controller.RequestParameter;
 import com.monkeybusiness.web.exception.UserServiceException;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class UserCommand implements Command {
+public class UserListCommand implements Command {
   private static final Logger LOGGER = LogManager.getLogger();
   private static final UserService service = UserServiceImpl.INSTANCE;
 
@@ -23,14 +25,14 @@ public class UserCommand implements Command {
     // todo
     LOGGER.log(Level.DEBUG, "UserCommand has been started");
     HttpSession session = request.getSession();
-    String page = request.getParameter(RequestParameter.CURRENT_PAGE);
     List<User> userList;
     try {
       userList = service.findAllUsers();
       request.setAttribute(RequestParameter.USER_LIST, userList);
     } catch (UserServiceException e) {
       LOGGER.log(Level.ERROR, e);
+      request.setAttribute(RequestParameter.GET_USER_LIST_RESULT, "Getting users operation has been failed");
     }
-    return page;
+   return UrlPath.USER_LIST_PAGE;
   }
 }

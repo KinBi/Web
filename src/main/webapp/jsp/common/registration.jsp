@@ -13,12 +13,12 @@
 <jsp:include page="/jsp/part/header.jsp" />
 <div style="width: 400px;
             padding: 20px; alignment: left">
-    <form method="post" action="controller">
+    <form method="post" action="${pageContext.request.contextPath}/login.do">
         <input type="hidden" name="command" value="to_login"/>
         <button type="submit" class="btn btn-outline-light">
             <fmt:message key="global.login_button"/></button>
     </form>
-    <form method="post" action="controller">
+    <form method="post" action="${pageContext.request.contextPath}/registration.do">
         <input type="hidden" name="command" value="registration"/>
         <input name="ctoken" type="hidden" value="${stoken}"/>
         <p class="text-log-reg"><fmt:message key="global.nickname"/><strong style="color: red"><fmt:message

@@ -11,8 +11,9 @@ import java.util.List;
 public interface Dao<T extends Entity> {
   List<T> findAll() throws DaoException;
   T findEntityById(long id) throws DaoException;
+  long calculateCount() throws DaoException;
   boolean exists(T entity) throws DaoException;
   boolean delete(long id) throws DaoException;
   boolean create(T entity, String... params) throws DaoException;
-  T update(T entity) throws DaoException;
+  boolean update(T entity) throws DaoException;
 }

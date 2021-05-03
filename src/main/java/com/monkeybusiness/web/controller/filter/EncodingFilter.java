@@ -14,11 +14,6 @@ public class EncodingFilter implements Filter {
   private static final String encoding = "UTF-8";
 
   @Override
-  public void init(FilterConfig config) throws ServletException {
-    // todo init
-  }
-
-  @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     LOGGER.log(Level.DEBUG, "EncodingFilter filtering");
     String codeRequest = request.getCharacterEncoding();
@@ -27,10 +22,5 @@ public class EncodingFilter implements Filter {
       response.setCharacterEncoding(encoding);
     }
     filterChain.doFilter(request, response);
-  }
-
-  @Override
-  public void destroy() {
-    // todo destroy
   }
 }

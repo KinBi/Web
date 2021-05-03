@@ -12,12 +12,13 @@
 <body>
 <div>
     <%--        fixme--%>
-    <label>UPLOAD IMAGE</label>
+    <label><fmt:message key="profile.uploadImage"/></label>
     <form action="${pageContext.request.contextPath}/upload/load" enctype="multipart/form-data" method="POST">
-        Upload File: <input type="image" name="content" height="130">
+        <fmt:message key="profile.uploadFile"/> <input type="file" name="content" accept="image/*">
         <input type="submit" value="Upload File">
+        <br/>${uploadResult}
     </form>
-    <label><fmt:message key="global.nickname"/> ${sessionScope.nickname}</label><br/>
+    <label class="text-dark text-center"><fmt:message key="global.nickname"/> ${sessionScope.nickname}</label><br/>
     <label><fmt:message key="global.email"/> ${sessionScope.email}</label><br/>
     <label><fmt:message key="global.score"/> ${sessionScope.score}</label><br/>
     <label><fmt:message key="global.cash"/> ${sessionScope.cash}</label><br/>

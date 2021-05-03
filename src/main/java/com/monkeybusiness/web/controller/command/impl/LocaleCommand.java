@@ -2,7 +2,7 @@ package com.monkeybusiness.web.controller.command.impl;
 
 import com.monkeybusiness.web.controller.command.Command;
 import com.monkeybusiness.web.controller.RequestParameter;
-import com.monkeybusiness.web.controller.SessionParameter;
+import com.monkeybusiness.web.controller.SessionAttribute;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +20,7 @@ public class LocaleCommand implements Command {
     LOGGER.log(Level.DEBUG, "LocaleCommand has been started");
     String lang = request.getParameter(RequestParameter.LOCALE_BUTTON);
     HttpSession session = request.getSession();
-    String page = (String) session.getAttribute(SessionParameter.CURRENT_PAGE_URL);
+    String page = ((String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL));
     String locale;
     switch (lang) {
       case RU:
@@ -30,7 +30,7 @@ public class LocaleCommand implements Command {
         locale = EN;
         break;
     }
-    session.setAttribute(SessionParameter.CURRENT_LOCALE, locale);
+    session.setAttribute(SessionAttribute.CURRENT_LOCALE, locale);
     return page;
   }
 }

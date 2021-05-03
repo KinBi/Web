@@ -12,31 +12,26 @@ import java.util.Properties;
 
 public class ConnectionCreator {
   private static final Logger LOGGER = LogManager.getLogger();
-  private static final String DBCONFIG_PATH = "/config/database.properties";
   private static final Properties properties = new Properties();
-  private static final String URL_ATTRIBUTE = "db.url";
+  private static final String DBCONFIG_PATH = "/config/database.properties";
   private static final String DRIVER_ATTRIBUTE = "db.driver";
-  private static final String USER_ATTRIBUTE = "db.user";
-  private static final String PASSWORD_ATTRIBUTE = "db.password";
+  private static final String URL_ATTRIBUTE = "db.url";
+  private static final String DATABASE_URL;
 
   static {
     try (InputStream is = ConnectionCreator.class.getResourceAsStream(DBCONFIG_PATH)) {
       properties.load(is);
-    } catch (IOException e) {
+      Class.forName(properties.getProperty(DRIVER_ATTRIBUTE));
+    } catch (IOException | ClassNotFoundException e) {
       LOGGER.log(Level.FATAL, e);
     }
+    DATABASE_URL = properties.getProperty(URL_ATTRIBUTE);
   }
 
+  private ConnectionCreator() {}
+
   public static Connection createConnection() throws SQLException {
-    try {
-      Class.forName(properties.getProperty(DRIVER_ATTRIBUTE));
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-    String url = properties.getProperty(URL_ATTRIBUTE);
-    String user = properties.getProperty(USER_ATTRIBUTE);
-    String password = properties.getProperty(PASSWORD_ATTRIBUTE);
-    Connection connection = DriverManager.getConnection(url, user, password);
+    Connection connection = DriverManager.getConnection(DATABASE_URL, properties);
     return connection;
   }
 }

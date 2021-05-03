@@ -63,6 +63,14 @@
         <servlet-name>AdminPage</servlet-name>
         <url-pattern>/admin/adminPage</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UserListPage</servlet-name>
+        <jsp-file>/jsp/admin/userList.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserListPage</servlet-name>
+        <url-pattern>/admin/userList</url-pattern>
+    </servlet-mapping>
 
     <!--    <filter>-->
     <!--        <filter-name>DoublePostSecureFilter</filter-name>-->

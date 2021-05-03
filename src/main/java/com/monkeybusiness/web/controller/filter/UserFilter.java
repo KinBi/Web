@@ -1,6 +1,6 @@
 package com.monkeybusiness.web.controller.filter;
 
-import com.monkeybusiness.web.controller.SessionParameter;
+import com.monkeybusiness.web.controller.SessionAttribute;
 import com.monkeybusiness.web.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -28,9 +28,9 @@ public class UserFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) resp;
     HttpSession session = request.getSession();
-    User.Role role = (User.Role) session.getAttribute(SessionParameter.USER_ROLE);
+    User.Role role = (User.Role) session.getAttribute(SessionAttribute.USER_ROLE);
     if (role == null || role.equals(User.Role.GUEST)) {
-      String page = (String) session.getAttribute(SessionParameter.CURRENT_PAGE_URL);
+      String page = (String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL);
       response.sendRedirect(request.getContextPath() + page);
     }
     chain.doFilter(req, resp);

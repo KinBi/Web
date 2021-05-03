@@ -13,11 +13,10 @@ public class CommandProvider {
   }
 
   public static Optional<Command> defineCommand(String commandName) {
-    Optional<Command> current;
     if (commandName == null || commandName.isBlank()) {
       return Optional.empty();
     }
-
+    Optional<Command> current;
     try {
       CommandType type = CommandType.valueOf(commandName.toUpperCase());
       current = Optional.of(type.getCurrentCommand());

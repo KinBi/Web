@@ -10,14 +10,14 @@
 <body>
 <jsp:include page="/jsp/part/background.jsp"/>
 <jsp:include page="/jsp/part/header.jsp" />
-<form method="post" action="${pageContext.request.contextPath}/controller">
+<form method="post" action="${pageContext.request.contextPath}/user/main.do">
     <input type="hidden" name="command" value="logout"/>
-    <h3 align="center">Main</h3>
+    <h3 align="center"><fmt:message key="main.main"/></h3>
     <p align="center"><fmt:message key="global.nickname" /> ${sessionScope.nickname}</p>
 <%--    fixme--%>
     <input style="margin:0 auto; display: block" type="submit" value="Logout"/>
 </form>
-<form method="post" action="${pageContext.request.contextPath}/controller">
+<form method="post" action="${pageContext.request.contextPath}/user/main.do">
     <input type="hidden" name="command" value="adv"/>
     <h1 align="center">Билл Гейтс был восхищён, когда узнал...</h1>
     <%--            <input style="margin:0 auto; display: block" type="image" img src="https://memepedia.ru/wp-content/uploads/2019/06/stonks-template.png"--%>

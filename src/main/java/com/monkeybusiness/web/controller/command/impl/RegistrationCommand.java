@@ -3,7 +3,7 @@ package com.monkeybusiness.web.controller.command.impl;
 import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.controller.command.Command;
 import com.monkeybusiness.web.controller.RequestParameter;
-import com.monkeybusiness.web.controller.SessionParameter;
+import com.monkeybusiness.web.controller.SessionAttribute;
 import com.monkeybusiness.web.exception.UserServiceException;
 import com.monkeybusiness.web.model.entity.User;
 import com.monkeybusiness.web.model.service.UserService;
@@ -35,12 +35,15 @@ public class RegistrationCommand implements Command {
       Optional<User> optionalUser = service.register(nickname, email, password);
       if (optionalUser.isPresent()) {
         User user = optionalUser.get();
-        session.setAttribute(SessionParameter.USER_ROLE, user.getRole());
-        session.setAttribute(SessionParameter.USER_NICKNAME, user.getNickname());
-        session.setAttribute(SessionParameter.USER_EMAIL, user.getEmail());
-        session.setAttribute(SessionParameter.USER_CASH, user.getCash());
-        session.setAttribute(SessionParameter.USER_SCORE, user.getScore());
+        session.setAttribute(SessionAttribute.USER_ID, user.getUserId());
+        session.setAttribute(SessionAttribute.USER_NICKNAME, user.getNickname());
+        session.setAttribute(SessionAttribute.USER_EMAIL, user.getEmail());
+        session.setAttribute(SessionAttribute.USER_SCORE, user.getScore());
+        session.setAttribute(SessionAttribute.USER_CASH, user.getCash());
+        session.setAttribute(SessionAttribute.USER_IMAGE, user.getImage());
+        session.setAttribute(SessionAttribute.USER_ROLE, user.getRole());
         page = UrlPath.MAIN;
+        request.setAttribute(RequestParameter.REGISTRATION_ERROR_MESSAGE, ERROR_MESSAGE);
         LOGGER.log(Level.INFO, "Registration has been finished successful");
       } else {
         LOGGER.log(Level.WARN, "Registration failed: Caused by Reptilian");
