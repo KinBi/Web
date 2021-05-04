@@ -18,11 +18,6 @@ public class GuestFilter implements Filter {
   private static final Logger LOGGER = LogManager.getLogger();
 
   @Override
-  public void init(FilterConfig config) throws ServletException {
-
-  }
-
-  @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
     LOGGER.log(Level.DEBUG, "GuestFilter has been filtering");
     HttpServletRequest request = (HttpServletRequest) req;
@@ -35,9 +30,4 @@ public class GuestFilter implements Filter {
     }
     chain.doFilter(req, resp);
   }
-
-  @Override
-  public void destroy() {
-  }
-
 }

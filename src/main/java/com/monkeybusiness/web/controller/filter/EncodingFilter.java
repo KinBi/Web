@@ -14,13 +14,13 @@ public class EncodingFilter implements Filter {
   private static final String encoding = "UTF-8";
 
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
     LOGGER.log(Level.DEBUG, "EncodingFilter filtering");
-    String codeRequest = request.getCharacterEncoding();
+    String codeRequest = req.getCharacterEncoding();
     if (codeRequest == null || !codeRequest.equalsIgnoreCase(encoding)) {
-      request.setCharacterEncoding(encoding);
-      response.setCharacterEncoding(encoding);
+      req.setCharacterEncoding(encoding);
+      resp.setCharacterEncoding(encoding);
     }
-    filterChain.doFilter(request, response);
+    chain.doFilter(req, resp);
   }
 }

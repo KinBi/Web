@@ -20,7 +20,7 @@ public class LocaleCommand implements Command {
     LOGGER.log(Level.DEBUG, "LocaleCommand has been started");
     String lang = request.getParameter(RequestParameter.LOCALE_BUTTON);
     HttpSession session = request.getSession();
-    String page = ((String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL));
+    String page = (String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL);
     String locale;
     switch (lang) {
       case RU:

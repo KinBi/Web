@@ -22,25 +22,25 @@ public class DoublePostSecureFilter implements Filter {
 
   // fixme
   @Override
-  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-    request = (HttpServletRequest) servletRequest;
+  public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+    request = (HttpServletRequest) req;
     if (request.getMethod().equals(GET_METHOD)) {
       session = request.getSession(true);
       session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(TOKEN_MAX_VALUE));
-      filterChain.doFilter(servletRequest, servletResponse);
+      chain.doFilter(req, resp);
     } else {
       serverToken = (Integer) session.getAttribute(SessionAttribute.SERVER_TOKEN);
       System.out.println("serverToken:" + serverToken);
-      clientToken = Integer.parseInt(servletRequest.getParameter(RequestParameter.CLIENT_TOKEN));
+      clientToken = Integer.parseInt(req.getParameter(RequestParameter.CLIENT_TOKEN));
       System.out.println("clientToken:" + clientToken);
       System.out.println(clientToken + "----------" + serverToken);
       if (serverToken == clientToken) {
         session.setAttribute(SessionAttribute.SERVER_TOKEN, new Random().nextInt(TOKEN_MAX_VALUE));
-        filterChain.doFilter(servletRequest, servletResponse);
+        chain.doFilter(req, resp);
       } else {
         String page = (String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL);
-        RequestDispatcher dispatcher = servletRequest.getRequestDispatcher(page);
-        dispatcher.forward(servletRequest, servletResponse);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(page);
+        dispatcher.forward(req, resp);
       }
     }
   }

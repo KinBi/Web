@@ -51,7 +51,7 @@
         </c:if>
 
         <form class="btn-group dropstart nav-m-p" method="post"
-              action="${pageContext.request.contextPath}/${sessionScope.currentPageUrl}.do">
+              action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="locale"/>
             <button type="button" class="btn btn-secondary dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false"><fmt:message key="navbar.lang"/>
