@@ -17,7 +17,7 @@
         <fmt:message key="global.login_button"/></a>
     <form method="post" action="${pageContext.request.contextPath}/registration.do">
         <input type="hidden" name="command" value="registration"/>
-        <input name="ctoken" type="hidden" value="${stoken}"/>
+        <input type="hidden" name="ctoken" value="${stoken}"/>
         <p class="text-log-reg"><fmt:message key="global.nickname"/><strong style="color: red"><fmt:message
                 key="global.asterisk"/></strong></p>
         <input class="textarea-log-reg" type="text" name="nickname" placeholder="KillAllHumans228"

@@ -15,8 +15,8 @@
     <a href="${pageContext.request.contextPath}/registration" class="btn btn-outline-light">
         <fmt:message key="global.registration_button"/></a>
     <form method="post" action="${pageContext.request.contextPath}/login.do">
-        <input name="ctoken" type="hidden" value="${stoken}"/>
         <input type="hidden" name="command" value="login"/>
+        <input type="hidden" name="ctoken" value="${stoken}"/>
         <p class="text-log-reg"><fmt:message key="global.login"/></p>
         <input class="textarea-log-reg" type="text" name="login" placeholder="somelogin"/>
         <p class="text-log-reg"><fmt:message key="global.password"/></p>

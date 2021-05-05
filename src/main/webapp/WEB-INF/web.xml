@@ -39,7 +39,7 @@
     <!--    UserPages-->
     <servlet>
         <servlet-name>Main</servlet-name>
-        <jsp-file>/jsp/common/main.jsp</jsp-file>
+        <jsp-file>/jsp/user/main.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
@@ -72,34 +72,24 @@
         <url-pattern>/admin/userList</url-pattern>
     </servlet-mapping>
 
-    <!--    <filter>-->
-    <!--        <filter-name>DoublePostSecureFilter</filter-name>-->
-    <!--        <filter-class>com.monkeybusiness.web.controller.filter.DoublePostSecureFilter</filter-class>-->
-    <!--    </filter>-->
-    <!--    <filter-mapping>-->
-    <!--        <filter-name>DoublePostSecureFilter</filter-name>-->
-    <!--        <url-pattern>/registration</url-pattern>-->
-    <!--        <url-pattern>/login</url-pattern>-->
-    <!--    </filter-mapping>-->
-
     <!--    fixme-->
-<!--    <filter>-->
-<!--        <filter-name>EncodingFilter</filter-name>-->
-<!--        <filter-class>com.monkeybusiness.web.controller.filter.EncodingFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>EncodingFilter</filter-name>-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </filter-mapping>-->
-<!--    <filter>-->
-<!--        <filter-name>DoublePostSecureFilter</filter-name>-->
-<!--        <filter-class>com.monkeybusiness.web.controller.filter.DoublePostSecureFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>DoublePostSecureFilter</filter-name>-->
-<!--        <url-pattern>/registration</url-pattern>-->
-<!--        <url-pattern>/login</url-pattern>-->
-<!--    </filter-mapping>-->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.monkeybusiness.web.controller.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>DoublePostSecureFilter</filter-name>
+        <filter-class>com.monkeybusiness.web.controller.filter.DoublePostSecureFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DoublePostSecureFilter</filter-name>
+        <url-pattern>/registration</url-pattern>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>GoBackActionFilter</filter-name>
         <filter-class>com.monkeybusiness.web.controller.filter.GoBackActionFilter</filter-class>
@@ -123,7 +113,8 @@
     </filter>
     <filter-mapping>
         <filter-name>UserFilter</filter-name>
-        <url-pattern>/user/*</url-pattern>
+        <url-pattern>/user/main</url-pattern>
+        <url-pattern>/user/profile</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>AdminFilter</filter-name>
@@ -131,6 +122,7 @@
     </filter>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/admin/adminPage</url-pattern>
+        <url-pattern>/admin/userList</url-pattern>
     </filter-mapping>
 </web-app>
