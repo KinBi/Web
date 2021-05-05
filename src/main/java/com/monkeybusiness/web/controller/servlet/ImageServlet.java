@@ -26,5 +26,6 @@ public class ImageServlet extends HttpServlet {
     response.setContentType("image/jpg");
     response.setContentLength(imageBytes.length);
     response.getOutputStream().write(imageBytes);
+    response.sendRedirect(request.getContextPath() + request.getSession().getAttribute(SessionAttribute.CURRENT_PAGE_URL));
   }
 }

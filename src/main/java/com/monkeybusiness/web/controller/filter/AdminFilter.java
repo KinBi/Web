@@ -15,21 +15,17 @@ import java.io.IOException;
 
 // todo
 @WebFilter
-public class AdminFilter implements Filter {
+public class AdminFilter extends AbstractSecurityFilter implements Filter {
   private static final Logger LOGGER = LogManager.getLogger();
-  private static final int ERROR_404 = 404;
 
   @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-    LOGGER.log(Level.DEBUG, "AdminFilter filtering");
+    LOGGER.log(Level.DEBUG, "AdminFilter has been filtering");
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response  = (HttpServletResponse) resp;
     HttpSession session = request.getSession();
-    User.Role role = (User.Role) session.getAttribute(SessionAttribute.USER_ROLE);
-    if (role == null || !role.equals(User.Role.ADMIN)) {
-      LOGGER.log(Level.DEBUG, "User not admin");
-      response.sendError(ERROR_404);
-    }
-    chain.doFilter(request, response);
+    String uri = request.getRequestURI();
+    boolean hasAccess = hasAccess((User.Role) session.getAttribute(SessionAttribute.USER_ROLE), User.Role.ADMIN);
+    forward(request, response, hasAccess, uri);
   }
 }

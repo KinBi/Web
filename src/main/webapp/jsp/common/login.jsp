@@ -12,11 +12,8 @@
 <jsp:include page="/jsp/part/header.jsp" />
 <div style="width: 400px;
             padding: 20px; alignment: left">
-    <form method="post" action="${pageContext.request.contextPath}/registration.do">
-        <input type="hidden" name="command" value="to_registration"/>
-        <button class="btn btn-outline-light" type="submit">
-            <fmt:message key="global.registration_button"/></button>
-    </form>
+    <a href="${pageContext.request.contextPath}/registration" class="btn btn-outline-light">
+        <fmt:message key="global.registration_button"/></a>
     <form method="post" action="${pageContext.request.contextPath}/login.do">
         <input name="ctoken" type="hidden" value="${stoken}"/>
         <input type="hidden" name="command" value="login"/>

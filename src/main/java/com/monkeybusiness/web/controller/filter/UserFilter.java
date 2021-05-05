@@ -1,6 +1,7 @@
 package com.monkeybusiness.web.controller.filter;
 
 import com.monkeybusiness.web.controller.SessionAttribute;
+import com.monkeybusiness.web.controller.UrlPath;
 import com.monkeybusiness.web.model.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -14,29 +15,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter
-public class UserFilter implements Filter {
+public class UserFilter extends AbstractSecurityFilter implements Filter {
   private static final Logger LOGGER = LogManager.getLogger();
 
   @Override
-  public void init(FilterConfig config) throws ServletException {
-
-  }
-
-  @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-    LOGGER.log(Level.DEBUG, "GuestFilter has been filtering");
+    LOGGER.log(Level.DEBUG, "UserFilter has been filtering");
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) resp;
     HttpSession session = request.getSession();
-    User.Role role = (User.Role) session.getAttribute(SessionAttribute.USER_ROLE);
-    if (role == null || role.equals(User.Role.GUEST)) {
-      String page = (String) session.getAttribute(SessionAttribute.CURRENT_PAGE_URL);
-      response.sendRedirect(request.getContextPath() + page);
+    String uri = request.getRequestURI();
+    boolean hasAccess = hasAccess((User.Role) session.getAttribute(SessionAttribute.USER_ROLE), User.Role.USER, User.Role.ADMIN);
+    if (!hasAccess) {
+      LOGGER.log(Level.INFO, "User has not access to page");
+      String redirectPage = UrlPath.LOGIN;
+      redirect(request, response, redirectPage);
+    } else {
+      forward(request, response, hasAccess, uri);
     }
-    chain.doFilter(req, resp);
   }
 
-  @Override
-  public void destroy() {
-  }
 }

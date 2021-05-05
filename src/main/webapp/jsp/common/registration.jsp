@@ -5,19 +5,16 @@
 <fmt:setBundle basename="locale.content"/>
 <html>
 <head>
-    <title><fmt:message key="registration.pageTitle" /></title>
+    <title><fmt:message key="registration.pageTitle"/></title>
     <link href="${pageContext.request.contextPath}/css/upgrade.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/jsp/part/background.jsp"/>
-<jsp:include page="/jsp/part/header.jsp" />
+<jsp:include page="/jsp/part/header.jsp"/>
 <div style="width: 400px;
             padding: 20px; alignment: left">
-    <form method="post" action="${pageContext.request.contextPath}/login.do">
-        <input type="hidden" name="command" value="to_login"/>
-        <button type="submit" class="btn btn-outline-light">
-            <fmt:message key="global.login_button"/></button>
-    </form>
+    <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-light">
+        <fmt:message key="global.login_button"/></a>
     <form method="post" action="${pageContext.request.contextPath}/registration.do">
         <input type="hidden" name="command" value="registration"/>
         <input name="ctoken" type="hidden" value="${stoken}"/>

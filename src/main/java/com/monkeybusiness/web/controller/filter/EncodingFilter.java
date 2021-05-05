@@ -8,7 +8,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter (urlPatterns = {"/*"})
+@WebFilter
 public class EncodingFilter implements Filter {
   private static final Logger LOGGER = LogManager.getLogger();
   private static final String encoding = "UTF-8";
