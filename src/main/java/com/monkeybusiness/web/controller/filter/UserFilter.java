@@ -34,5 +34,4 @@ public class UserFilter extends AbstractSecurityFilter implements Filter {
       forward(request, response, hasAccess, uri);
     }
   }
-
 }

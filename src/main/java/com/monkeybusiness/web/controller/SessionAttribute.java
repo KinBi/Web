@@ -11,6 +11,8 @@ public class SessionAttribute {
   public static final String USER_ROLE = "role";
   public static final String CURRENT_PAGE_URL = "currentPageUrl";
   public static final String SERVER_TOKEN = "stoken";
+  public static final String STATE = "userState";
+  public static final String GAME_ID = "gameId";
 
   private SessionAttribute() {};
 }

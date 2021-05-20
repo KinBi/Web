@@ -24,6 +24,9 @@
                 <c:if test="${sessionScope.role ne 'GUEST'}">
                     <a href="${pageContext.request.contextPath}/user/main" class="nav-link">
                         <fmt:message key="navbar.home"/></a>
+                    <a href="${pageContext.request.contextPath}/user/game" class="nav-link">
+                        <fmt:message key="navbar.game"/></a>
+                    </a>
                 </c:if>
                 <c:if test="${sessionScope.role eq 'ADMIN'}">
                     <a href="${pageContext.request.contextPath}/admin/adminPage" class="nav-link">

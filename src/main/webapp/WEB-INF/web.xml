@@ -53,6 +53,14 @@
         <servlet-name>Profile</servlet-name>
         <url-pattern>/user/profile</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Game</servlet-name>
+        <jsp-file>/jsp/user/game.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Game</servlet-name>
+        <url-pattern>/user/game</url-pattern>
+    </servlet-mapping>
 
     <!--    AdminPages-->
     <servlet>
@@ -115,6 +123,7 @@
         <filter-name>UserFilter</filter-name>
         <url-pattern>/user/main</url-pattern>
         <url-pattern>/user/profile</url-pattern>
+        <url-pattern>/user/game</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>AdminFilter</filter-name>
